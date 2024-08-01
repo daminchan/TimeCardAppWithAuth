@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import UserManagementPanel from "@/features/user-management/components/UserManagementPanel";
 import { getUsersForAdmin } from "@/features/user-management/api/userManagementService";
-import { Box, Heading, Link, Text } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import FlexCol from "@/components/ui/FlexCol";
 
 import RestrictedAccessView from "@/components/status/RestrictedAccessView";

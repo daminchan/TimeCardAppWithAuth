@@ -3,7 +3,7 @@ import { useState } from "react";
 import UserList from "./UserList";
 import UserDetails from "./UserDetails";
 import { User } from "../types";
-import { Flex, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import FlexCol from "@/components/ui/FlexCol";
 
 interface UserManagementPanelProps {

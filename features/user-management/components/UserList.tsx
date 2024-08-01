@@ -1,18 +1,7 @@
 import CustomButton from "@/components/ui/Button/CustomButton";
 import { handleDeleteUser } from "../actions/userManagementActions";
 import { User } from "../types";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Button,
-  Box,
-  Heading,
-  HStack,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Box } from "@chakra-ui/react";
 
 interface UserListProps {
   users: User[];
