@@ -2,12 +2,11 @@ import { auth } from "@/auth";
 import NavButton from "@/components/navigation/NavButton";
 
 import RestrictedAccessView from "@/components/status/RestrictedAccessView";
-import CustomButton from "@/components/ui/Button/CustomButton";
+
 import FlexCol from "@/components/ui/FlexCol";
 import { getUserTimeCards } from "@/features/timecard/api/timeCardService";
 import TimeCardPanel from "@/features/timecard/components/TimeCardPanel";
 import { Heading, Box } from "@chakra-ui/react";
-import Link from "next/link";
 
 export default async function DashboardPage() {
   const session = await auth();
