@@ -4,6 +4,7 @@ import Link from "next/link";
 import FlexCol from "@/components/ui/FlexCol";
 import { Button, Heading } from "@chakra-ui/react";
 import CustomButton from "@/components/ui/Button/CustomButton";
+import NavButton from "@/components/navigation/NavButton";
 
 export default async function Home() {
   const session = await auth();
@@ -16,12 +17,8 @@ export default async function Home() {
             TOPページ
           </Heading>
           <FlexCol align="center" gap={4}>
-            <Link href="/mypage">
-              <CustomButton>マイページ</CustomButton>
-            </Link>
-            <Link href="/management/users">
-              <CustomButton>管理ページ</CustomButton>
-            </Link>
+            <NavButton href="/mypage" label="マイページ" />
+            <NavButton href="/management/users" label="管理ページ" />
             <form action={logout}>
               <CustomButton type="submit">ログアウト</CustomButton>
             </form>
@@ -33,9 +30,7 @@ export default async function Home() {
             勤務管理アプリ
           </Heading>
           <FlexCol align="center" gap={4}>
-            <Link href="/auth/login">
-              <CustomButton width="200px">ログイン</CustomButton>
-            </Link>
+            <NavButton href="/auth/login" label="ログイン" />
           </FlexCol>
         </>
       )}

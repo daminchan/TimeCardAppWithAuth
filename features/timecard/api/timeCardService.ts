@@ -1,7 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { prisma } from "@/globals/db";
 import { TimeCard } from "../types";
 
@@ -136,26 +134,6 @@ export const getTimeCard = async (userId: string): Promise<TimeCard | null> => {
     throw new Error("タイムカードの取得に失敗しました。");
   }
 };
-
-// export async function getUserTimeCards(userId: string): Promise<TimeCard[]> {
-//   try {
-//     const data = await prisma.timeCard.findMany({
-//       where: { userId: userId },
-//       orderBy: { date: "desc" },
-//     });
-
-//     return data
-//       .filter((card) => card.startTime !== null)
-//       .map((card) => ({
-//         id: card.id,
-//         clockIn: card.startTime as Date,
-//         clockOut: card.endTime,
-//       }));
-//   } catch (error) {
-//     console.error("タイムカードデータの取得に失敗しました:", error);
-//     return [];
-//   }
-// }
 
 export async function getUserTimeCards(userId: string): Promise<TimeCard[]> {
   try {

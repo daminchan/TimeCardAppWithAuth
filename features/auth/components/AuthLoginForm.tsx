@@ -3,14 +3,7 @@
 import CustomButton from "@/components/ui/Button/CustomButton";
 import FlexCol from "@/components/ui/FlexCol";
 import { login } from "@/features/auth/lib/authActions";
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Input, Text } from "@chakra-ui/react";
 import { useFormState } from "react-dom";
 
 export default function AuthLoginForm() {
@@ -69,29 +62,3 @@ export default function AuthLoginForm() {
     </form>
   );
 }
-// import React from 'react';
-// import { useForm } from 'react-hook-form';
-// import { Button, Input } from '@chakra-ui/react';
-// import { signIn } from 'next-auth/react';
-
-// const AuthLoginForm = () => {
-//   const { register, handleSubmit } = useForm();
-
-//   const onSubmit = async (data: any) => {
-//     await signIn('credentials', {
-//       redirect: false,
-//       email: data.email,
-//       password: data.password,
-//     });
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)}>
-//       <Input placeholder="Email" {...register('email')} />
-//       <Input placeholder="Password" {...register('password')} type="password" />
-//       <Button type="submit">Login</Button>
-//     </form>
-//   );
-// };
-
-// export default AuthLoginForm;

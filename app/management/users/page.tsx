@@ -30,7 +30,7 @@ export default async function ManagementPage() {
       <Heading as="h1" size="xl">
         ユーザー登録
       </Heading>
-      <NavButton href="/sign-up" label="サインアップ" />
+      <NavButton href="/auth/sign-up" label="サインアップ" />
       <NavButton href="/" label="ホームに戻る" />
     </FlexCol>
   );

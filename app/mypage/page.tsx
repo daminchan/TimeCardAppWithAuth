@@ -7,12 +7,30 @@ import TimeCardDisplay from "@/features/timecard/components/TimeCardDisplay";
 import { Box, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import { TimeCard } from "@/features/timecard/types";
+import RestrictedAccessView from "@/components/status/RestrictedAccessView";
+import NavButton from "@/components/navigation/NavButton";
 
 export default async function MyPage() {
   const session = await auth();
+
   if (!session || !session.user) {
-    // セッションがない場合の処理（例：ログインページへのリダイレクト）
-    return null;
+    return (
+      <RestrictedAccessView
+        message="閲覧にはログインが必要です"
+        linkText="ログイン"
+        linkHref="/login"
+      />
+    );
+  }
+
+  if (session.user.role !== "member" && session.user.role !== "admin") {
+    return (
+      <RestrictedAccessView
+        message="閲覧には適切な権限が必要です"
+        linkText="ホーム"
+        linkHref="/"
+      />
+    );
   }
 
   const timeCard: TimeCard | null = await getTimeCard(session.user.id);
@@ -39,16 +57,8 @@ export default async function MyPage() {
           />
         </FlexCol>
       </Box>
-      <Link href="/mypage/dashboard" passHref>
-        <CustomButton as="span" width="200px">
-          ダッシュボードページ
-        </CustomButton>
-      </Link>
-      <Link href="/" passHref>
-        <CustomButton as="span" width="200px">
-          ホーム
-        </CustomButton>
-      </Link>
+      <NavButton href="/mypage/dashboard" label="ダッシュボード" />
+      <NavButton href="/" label="ホームに戻る" />
     </FlexCol>
   );
 }

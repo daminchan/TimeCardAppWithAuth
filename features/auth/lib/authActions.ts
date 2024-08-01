@@ -85,25 +85,8 @@ export async function login(prevState: string | undefined, formData: FormData) {
 
     throw error;
   }
-  // redirect("/");
+  redirect("/");
 }
-
-// export async function login(prevState: string | undefined, formData: FormData) {
-//   try {
-//     await signIn("credentials", formData);
-//   } catch (error) {
-//     if (error instanceof AuthError) {
-//       switch (error.type) {
-//         case "CredentialsSignin":
-//           return "入力情報に間違いがあります.";
-//         default:
-//           return "Something went wrong.";
-//       }
-//     }
-
-//     throw error;
-//   }
-// }
 
 export async function logout() {
   try {
