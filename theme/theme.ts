@@ -23,7 +23,6 @@ const customTheme = extendTheme({
         height: "100vh",
         margin: 0,
         padding: 0,
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
       },

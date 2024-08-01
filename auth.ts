@@ -20,36 +20,40 @@ export const { auth, signIn, signOut } = NextAuth({
 
           const passwordMatch = await bcrypt.compare(password, user.password);
 
-          if (passwordMatch) return user;
+          if (passwordMatch) {
+            return {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              role: user.role,
+            }; // 必要なフィールドを追加
+          }
         }
-
+        console.log("認証失敗：", credentials);
         return null;
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.name = user.name;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+        session.user.name = token.name as string;
+      }
+      return session;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 });
-// import NextAuth, { NextAuthConfig } from "next-auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
-// import Github from "next-auth/providers/github";
-
-// export const config: NextAuthConfig = {
-//   providers: [Github],
-//   basePath: "/api/auth",
-//   callbacks: {
-//     authorized({ request, auth }) {
-//       try {
-//         const { pathname } = request.nextUrl;
-//         if (pathname === "/protected-page") return !!auth;
-//         return true;
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     },
-//     jwt({ token, trigger, session }) {
-//       if (trigger === "update") token.name = session?.user?.name;
-//       return token;
-//     },
-//   },
-// };
-
-// export const { handlers, auth, signIn, signOut } = NextAuth(config);

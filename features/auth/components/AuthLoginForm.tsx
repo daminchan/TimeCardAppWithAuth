@@ -17,7 +17,7 @@ export default function AuthLoginForm() {
   const [errorMessage, dispatch] = useFormState(login, undefined);
 
   return (
-    <form action={dispatch} style={{ width: "100%" }}>
+    <form action={dispatch} style={{ width: "400px" }}>
       <Box width="100%" borderRadius="lg" bg="gray.50" p={6}>
         <FlexCol align="stretch" gap={4}>
           <FormControl>

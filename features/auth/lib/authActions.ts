@@ -12,6 +12,8 @@ export type SignUpState = {
   errors?: {
     email?: string[];
     password?: string[];
+    name?: string[];
+    role?: string[];
   };
   message?: string | null;
 };
@@ -23,6 +25,8 @@ export async function signUp(
   const validatedFields = signUpSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
+    name: formData.get("name"),
+    role: formData.get("role"),
   });
 
   if (!validatedFields.success) {
@@ -32,7 +36,7 @@ export async function signUp(
     };
   }
 
-  const { email, password } = validatedFields.data;
+  const { email, password, name, role } = validatedFields.data;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,7 +52,8 @@ export async function signUp(
       data: {
         email: email,
         password: hashedPassword,
-        role: "user", // 明示的にroleを設定
+        name: name,
+        role: role,
       },
     });
   } catch (error) {
@@ -59,8 +64,15 @@ export async function signUp(
 }
 
 export async function login(prevState: string | undefined, formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -73,7 +85,25 @@ export async function login(prevState: string | undefined, formData: FormData) {
 
     throw error;
   }
+  // redirect("/");
 }
+
+// export async function login(prevState: string | undefined, formData: FormData) {
+//   try {
+//     await signIn("credentials", formData);
+//   } catch (error) {
+//     if (error instanceof AuthError) {
+//       switch (error.type) {
+//         case "CredentialsSignin":
+//           return "入力情報に間違いがあります.";
+//         default:
+//           return "Something went wrong.";
+//       }
+//     }
+
+//     throw error;
+//   }
+// }
 
 export async function logout() {
   try {

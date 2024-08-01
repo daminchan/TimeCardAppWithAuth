@@ -16,6 +16,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   type = "button",
   color = "white", // デフォルトの文字色を白に設定
   width = "100%",
+  isDisabled = false, // デフォルトで無効化されていない
   ...props
 }) => {
   return (
@@ -25,6 +26,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       type={type}
       color={color}
       width={width} // デフォルトの幅
+      isDisabled={isDisabled} // 無効化状態を設定
+      opacity={isDisabled ? 0.5 : 1} // 無効化状態に応じて不透明度を変更
       {...props}
     >
       {children}

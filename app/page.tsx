@@ -1,4 +1,4 @@
-import { logout } from "@/features/auth/api/auth";
+import { logout } from "@/features/auth/lib/authActions";
 import { auth } from "@/auth";
 import Link from "next/link";
 import FlexCol from "@/components/ui/FlexCol";
@@ -12,12 +12,15 @@ export default async function Home() {
     <FlexCol minH="100vh" align="center" justify="center" py={6}>
       {session ? (
         <>
-          <Heading as="h1" size="xl" mb={6} textAlign="center">
+          <Heading as="h1" size="xl" textAlign="center">
             TOPページ
           </Heading>
           <FlexCol align="center" gap={4}>
             <Link href="/mypage">
               <CustomButton>マイページ</CustomButton>
+            </Link>
+            <Link href="/management/users">
+              <CustomButton>管理ページ</CustomButton>
             </Link>
             <form action={logout}>
               <CustomButton type="submit">ログアウト</CustomButton>
@@ -26,15 +29,12 @@ export default async function Home() {
         </>
       ) : (
         <>
-          <Heading as="h1" size="xl" mb={6} textAlign="center">
+          <Heading as="h1" size="xl" textAlign="center">
             勤務管理アプリ
           </Heading>
           <FlexCol align="center" gap={4}>
             <Link href="/auth/login">
               <CustomButton width="200px">ログイン</CustomButton>
-            </Link>
-            <Link href="/sign-up">
-              <CustomButton width="200px">サインアップ</CustomButton>
             </Link>
           </FlexCol>
         </>
